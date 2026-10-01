@@ -3,7 +3,7 @@ const userQueries = require("../db/user.query");
 
 validateSignUp = [
     body("username")
-        .isString().withMessage("Username must be a string!")
+        .isString().withMessage("Username must be text!")
         .trim()
         .notEmpty().withMessage("Username is required!")
         .isLength({max: 100}).withMessage("Username is too long!")
@@ -16,7 +16,7 @@ validateSignUp = [
 
 
     body("password")
-        .isString().withMessage("Password must be a string!")
+        .isString().withMessage("Password must be text!")
         .notEmpty().withMessage("Password cannot be empty")
         .isLength({min: 8, max: 100}).withMessage("Password must be between 8 and 100 characters!")
         .matches(/\d/).withMessage("Password must contain at least one digit.")
