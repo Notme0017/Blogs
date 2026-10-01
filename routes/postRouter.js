@@ -8,36 +8,41 @@ const {showPublishedPosts, showAllPosts,
     deletePost, requirePostOwner
 } = require("../controllers/postController");
 const { validateCreatePost, validateUpdatePost, validateChangePublishStatus } = require("../validator/postValidation");
-const { validationResult } = require("express-validator");
+const validateRequest = require("../middlewares/validateRequest");
 
 router.get("/", showPublishedPosts);
 router.get("/all", 
     isAuthenticated, 
-    showAllPosts);//require author here
+    showAllPosts
+);//require author here
 
 router.post("/", 
     isAuthenticated, 
     validateCreatePost,
-    validationResult,
-    createPost);//require author here
+    validateRequest,
+    createPost
+);//require author here
 
 router.get("/:id", showPost);
 
 router.put("/:id", isAuthenticated, 
     validateUpdatePost,
-    validationResult,
+    validateRequest,
     requirePostOwner, 
-    updatePost);
-router.patch("/:id/publish", 
+    updatePost
+);
+router.put("/:id/publish", 
     isAuthenticated, 
     validateChangePublishStatus,
-    validationResult,
+    validateRequest,
     requirePostOwner, 
-    changePublishStatus);
+    changePublishStatus
+);
 
 router.delete("/:id", 
     isAuthenticated, 
     requirePostOwner, 
-    deletePost);
+    deletePost
+);
 
 module.exports = router;

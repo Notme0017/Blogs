@@ -68,7 +68,7 @@ exports.createPost = async (req, res, next) =>{
 
         const post = await postQueries.createPost(title, content, userId);
     
-        return res.status(200).json(post);
+        return res.status(201).json(post);
     }catch(err){
         next(err);
     }

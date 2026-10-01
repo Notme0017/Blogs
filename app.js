@@ -1,12 +1,14 @@
 const express = require("express");
 const postRouter = require("./routes/postRouter");
 const authRouter = require("./routes/authRouter");
+const commentRouter = require("./routes/commentRouter");
 const errorHandler = require("./controllers/errorController");
 const app = express();
 
 app.use(express.json());
 
 app.use("/auth", authRouter);
+app.use("/posts/:postId/comments", commentRouter);
 app.use('/posts', postRouter);
 app.use('/', (req, res, next) =>{
     res.json({

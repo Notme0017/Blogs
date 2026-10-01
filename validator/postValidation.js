@@ -5,8 +5,7 @@ validateCreatePost = [
         .isString().withMessage("Title must be text!")
         .trim()
         .notEmpty().withMessage("Title cannot be null!")
-        .isLength({max: 255}).withMessage("Title is too long!")
-        .matches(/^[a-zA-Z0-9]$/).withMessage("Title can only contain letters, numbers and underscore."),
+        .isLength({max: 255}).withMessage("Title is too long!"),
 
     body("content")
         .isString().withMessage("Content can only be text!")
@@ -24,9 +23,8 @@ validateUpdatePost = [
         .isString().withMessage("Title must be text!")
         .trim()
         .notEmpty().withMessage("Title cannot be empty!")
-        .isLength({max: 255}).withMessage("Title is too long!")
-        .matches(/^[a-zA-Z0-9]$/).withMessage("Title can only contain letters, numbers and underscore."),
-
+        .isLength({max: 255}).withMessage("Title is too long!"),
+        
     body("content")
         .isString().withMessage("Content can only be text!")
         .notEmpty().withMessage("Content cannot be empty!")
