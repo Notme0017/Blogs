@@ -1,0 +1,28 @@
+const express = require("express");
+const postRouter = require("./routes/postRouter");
+const authRouter = require("./routes/authRouter");
+const errorHandler = require("./controllers/errorController");
+const app = express();
+
+app.use(express.json());
+
+app.use("/auth", authRouter);
+app.use('/posts', postRouter);
+app.use('/', (req, res, next) =>{
+    res.json({
+        test: "testing",
+    })
+});
+
+app.use((req, res, next) =>{
+    res.status(404).send("Page not found!");
+});
+
+app.use(errorHandler);
+
+
+const PORT = 8080;
+app.listen(PORT, (err) =>{
+    if(err)throw err;
+    console.log("Express listening on port: 8080!");
+});
