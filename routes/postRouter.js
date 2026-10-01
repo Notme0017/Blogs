@@ -1,5 +1,5 @@
 const {Router} = require("express");
-const {isAuthenticated} = require("../middlewares/authenticateUser")
+const {isAuthenticated, requireAuthor} = require("../middlewares/authenticateUser")
 const router = Router();
 
 const {showPublishedPosts, showAllPosts, 
@@ -13,15 +13,17 @@ const validateRequest = require("../middlewares/validateRequest");
 router.get("/", showPublishedPosts);
 router.get("/all", 
     isAuthenticated, 
+    requireAuthor,
     showAllPosts
-);//require author here
+);
 
 router.post("/", 
     isAuthenticated, 
+    requireAuthor,
     validateCreatePost,
     validateRequest,
     createPost
-);//require author here
+);
 
 router.get("/:id", showPost);
 
