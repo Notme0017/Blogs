@@ -5,7 +5,8 @@ const router = Router();
 const {showPublishedPosts, showAllPosts, 
     createPost, showPost, 
     updatePost, changePublishStatus, 
-    deletePost, requirePostOwner
+    deletePost, requirePostOwner,
+    showPostForAuthor,
 } = require("../controllers/postController");
 const { validateCreatePost, validateUpdatePost, validateChangePublishStatus } = require("../validator/postValidation");
 const validateRequest = require("../middlewares/validateRequest");
@@ -24,6 +25,8 @@ router.post("/",
     validateRequest,
     createPost
 );
+
+router.get("/author/:id", isAuthenticated, requireAuthor, requirePostOwner, showPostForAuthor);
 
 router.get("/:id", showPost);
 

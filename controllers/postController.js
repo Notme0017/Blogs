@@ -44,8 +44,9 @@ exports.showPublishedPosts = async (req, res, next) =>{
 exports.showAllPosts = async (req, res, next) =>{
     try{
         const {page, limit, skip} = getPagination(req.query);
-        const posts = await postQueries.getAllPost(skip, limit);
-        const totalPosts = await postQueries.getAllPostCount();
+        const userId = req.user.id;
+        const posts = await postQueries.getAllPost(userId, skip, limit);
+        const totalPosts = await postQueries.getAllPostCount(userId);
     
         res.status(200).json({
             data: posts,
@@ -75,6 +76,21 @@ exports.createPost = async (req, res, next) =>{
 };
 
 exports.showPost = async (req, res, next) =>{
+    try{
+        const postId = req.params.id;
+        const post = await postQueries.getPublishedPostById(postId);
+
+        if(!post) return res.status(404).json({
+            error: "Post not found!",
+        });
+
+        return res.status(200).json(post);
+    }catch(err){
+        next(err);
+    }
+};
+
+exports.showPostForAuthor = async (req, res, next) =>{
     try{
         const postId = req.params.id;
         const post = await postQueries.getPostById(postId);

@@ -25,8 +25,9 @@ class Post{
         });
     };
 
-     async getAllPost(skip, limit){
+     async getAllPost(userId, skip, limit){
         return prisma.post.findMany({
+            where: {userId: userId},
             select: {
                 id: true,
                 title: true,
@@ -57,8 +58,10 @@ class Post{
         });
     };
 
-    async getAllPostCount(){
-        return prisma.post.count();
+    async getAllPostCount(userId){
+        return prisma.post.count({
+            where: {userId: userId}
+        });
     };
 
     async getUserIdByPostId(postId){
