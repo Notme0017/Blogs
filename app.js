@@ -10,11 +10,6 @@ app.use(express.json());
 app.use("/auth", authRouter);
 app.use("/posts/:postId/comments", commentRouter);
 app.use('/posts', postRouter);
-app.use('/', (req, res, next) =>{
-    res.json({
-        test: "testing",
-    })
-});
 
 app.use((req, res, next) =>{
     res.status(404).send("Page not found!");
