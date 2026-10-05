@@ -77,9 +77,9 @@ class Post{
         });
     }
 
-    async getPostById(postId){
+    async getPostById(postId, userId){
         return prisma.post.findUnique({
-            where: {id: postId},
+            where: {id: postId, userId: userId},
             select: {
                 id: true,
                 title: true,

@@ -93,7 +93,8 @@ exports.showPost = async (req, res, next) =>{
 exports.showPostForAuthor = async (req, res, next) =>{
     try{
         const postId = req.params.id;
-        const post = await postQueries.getPostById(postId);
+        const userId = req.user.id;
+        const post = await postQueries.getPostById(postId, userId);
 
         if(!post) return res.status(404).json({
             error: "Post not found!",
