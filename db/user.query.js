@@ -69,6 +69,16 @@ class User{
             }
         });
     };
+
+    async createUser(username, password, isAuthor){
+        return prisma.user.create({
+            data: {
+                username: username,
+                password: password,
+                isAuthor: isAuthor,
+            },
+        });
+    }
 }
 
 module.exports = new User();

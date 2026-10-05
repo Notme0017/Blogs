@@ -17,6 +17,21 @@ exports.signUpUser = async (req, res, next) =>{
     };
 };
 
+exports.signUpAuthor = async (req, res, next) =>{
+    try{
+        const{username, password, isAuthor} = req.body;
+
+        const hashedPassword = await bcrypt.hashPassword(password);
+
+        const user = await userQueries.createUser(username, hashedPassword, isAuthor);
+
+        res.status(201)
+        .json({id: user.id, username: user.username, isAuthor: user.isAuthor});
+    }catch(err){
+        next(err);
+    }
+}
+
 exports.loginUser = async (req, res, next) =>{
     try{
         const { username, password } = req.body;

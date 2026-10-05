@@ -36,7 +36,7 @@ router.put("/:id", isAuthenticated,
     requirePostOwner, 
     updatePost
 );
-router.put("/:id/publish", 
+router.patch("/:id/publish", 
     isAuthenticated, 
     validateChangePublishStatus,
     validateRequest,
