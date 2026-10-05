@@ -201,12 +201,14 @@ This is enforced in `middlewares/authenticateUser.js`.
 |---|---|---|---|
 | GET | `/posts` | Public | List published posts |
 | GET | `/posts/all` | Author | List all posts for the authenticated author |
-| GET | `/posts/author/:id` | Author | View a specific post for the author |
+| GET | `/posts/author/:id` | Author | View a specific post by ID for the authenticated author only |
 | GET | `/posts/:id` | Public | Get a published post by ID |
 | POST | `/posts` | Author | Create a new post (draft by default) |
 | PUT | `/posts/:id` | Author | Update a post |
 | PATCH | `/posts/:id/publish` | Author | Toggle published status using `publishStatus` |
 | DELETE | `/posts/:id` | Author | Delete a post |
+
+The `/posts/author/:id` route is restricted to authors and checks that the post belongs to the authenticated user before returning it.
 
 ### Comments
 
