@@ -5,6 +5,15 @@ const commentRouter = require("./routes/commentRouter");
 const errorHandler = require("./controllers/errorController");
 const app = express();
 
+const cors = require("cors");
+
+const allowedOrigins = (process.env.CORS_ORIGINS || "")
+  .split(",")
+  .map((o) => o.trim())
+  .filter(Boolean);
+
+app.use(cors({ origin: allowedOrigins }));
+
 app.use(express.json());
 
 app.use("/auth", authRouter);
